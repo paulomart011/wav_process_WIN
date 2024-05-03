@@ -11,9 +11,9 @@ Cada uno de estos puntos estan colocados en sus respectivas carpetas:
 
 1. Configuración FTP en Servidor Intermedio Linux (1. Servidor Linux FTP)
 2. Configuración subida a SFTP en Servidor Intermedio Linux (2. Servidor Linux SFTP)
-3. Configurar en PBX para carga a FTP (4. Servidor PBX)
-4. Alarmas en PBX y servidor intermedio Linux (5. Alarmas)
-5. Listado en BD y CSV (6. Listado en BD y CSV)
+3. Configurar en PBX para carga a FTP (3. Servidor PBX)
+4. Alarmas en PBX y servidor intermedio Linux (4. Alarmas)
+5. Listado en BD y CSV (5. Listado en BD y CSV)
 
 
 ## 0. Repositorios:
@@ -316,7 +316,7 @@ Si el proceso se detiene por carga de archivos, se debe revisar que esta generan
 
 ## 5. Listado en BD y en CSV:
 
-En un servidor Windows (puede ser el MW, en WIN se uso el MW3), crear la carpeta tmpAudios por ejemplo (modificar según el disco que se tenga):
+En un servidor Windows (en WIN se uso el MW3), crear la carpeta tmpAudios por ejemplo (modificar según el disco que se tenga):
 ```
 C:\tmpAudios
 ```
@@ -382,7 +382,7 @@ BEGIN
 	EXEC [sp_GenerateReportDetailInOutCallsByCampaignToSFTP] 
 END
 ```
-Finalmente el siguiente sp se encarga de enviar el archivo con la metadata adicional a la ruta correspondiente:
+Finalmente el siguiente sp se encarga de enviar el archivo con la metadata adicional a la ruta correspondiente del SFTP:
 ```
 USE [WINKeywords]
 GO
@@ -618,7 +618,7 @@ SET NOCOUNT OFF
 
 ```
 
-Lo que hará el proceso es crear un archivo con información de los audios generados en la ultima hora, esta información contiene datos de la interacción en OCC.
+Lo que hará el proceso es crear un archivo con información de los audios generados en la ultima hora, esta información contiene datos de la interacción en OCC. Y esta información es enviada a la ruta correspondiente del SFTP
 
 Luego, subir el proceso de listado de audios "Ejecutable.zip" (carpeta 5. Listado en BD y CSV), y mediante un task scheduler poner que se ejecute cada hora. Lo que hara el proceso es listar todos los archivos de la hora anterior.
 En el archivo appSettings.json modificar las siguientes lineas en base a lo requerido:
